@@ -239,15 +239,15 @@
               <ul>
                 <li>
                   <strong>Destek Transkriptleri (Sunucu Diski):</strong> 
-                  Kapatılan destek biletlerine ait HTML transkript dosyaları yerel diskte (<code>data/transcripts/</code>) saklanır. Kod tabanımızdaki <code>TranscriptService.cleanupOldTranscripts(retentionDays = 30)</code> prosedürü gereğince 30 günden eski dosyalar temizlik döngüsüne tabi tutulur; ayrıca talep halinde derhal diskten kalıcı olarak silinir.
+                  Kapatılan destek biletlerine ait HTML transkript dosyaları yerel diskte (<code>data/transcripts/</code>) saklanır. Sistemimizde sürekli çalışan otomatik bir arka plan zamanlayıcısı bulunmamaktadır; kod tabanımızda yer alan <code>TranscriptService.cleanupOldTranscripts(retentionDays = 30)</code> temizleme prosedürü, yetkili yöneticilerce gerçekleştirilen periyodik bakım döngülerinde işletilir. Kullanıcıların veri silme talepleri yürürlükteki mevzuat hükümleri çerçevesinde değerlendirilerek onaylanması halinde ilgili transkript dosyaları diskten silinir.
                 </li>
                 <li>
                   <strong>Discord İçi Arşiv Kopyası (<code>#ticket-log</code>):</strong> 
-                  Bir destek bileti kapatıldığında, şeffaflık ve yetkili denetimi amacıyla HTML transkriptin bir kopyası yalnızca yetkili personelin (Yönetim, Moderatör ve Destek Ekibi) erişebildiği kilitli <code>#🎫・ticket-log</code> kanalına gönderilir. Bu kopyalar Discord sunucu altyapısında barınır; sunucu yönetiminin denetimindedir ve kullanıcının veri silme talebinde bulunması durumunda yetkililerce ilgili mesaj ve dosya kanaldan da kalıcı olarak silinir.
+                  Bir destek bileti kapatıldığında, yetkili denetimi ve şeffaflık amacıyla HTML transkriptin bir kopyası yalnızca yetkili personelin (Yönetim, Moderatör ve Destek Ekibi) erişebildiği kilitli <code>#🎫・ticket-log</code> kanalına gönderilir. Bu kopyalar Discord sunucu altyapısında barınır; otomatik bir zamanlayıcıyla silinmez. Kullanıcının mevzuata uygun veri silme talebinde bulunması ve talebin onaylanması durumunda yetkililerce ilgili mesaj ve ekli dosya kanaldan temizlenir.
                 </li>
                 <li>
                   <strong>Üye Profil ve Rol Tercihleri:</strong> 
-                  Kullanıcı sunucunun bir üyesi olduğu müddetçe aktif tutulur. Kullanıcı sunucudan ayrıldığında ayrılış tarihi kaydedilir; kullanıcı silme talebinde bulunursa verileri kalıcı olarak temizlenir.
+                  Kullanıcı sunucunun bir üyesi olduğu müddetçe aktif tutulur. Kullanıcı sunucudan ayrıldığında ayrılış tarihi kaydedilir; mevzuata uygun bir veri silme talebinde bulunulması halinde başvuru değerlendirilerek yasal süreler dahilinde işlem yapılır.
                 </li>
                 <li>
                   <strong>Moderasyon Kayıtları:</strong> 
@@ -264,15 +264,15 @@
               <ul>
                 <li>
                   <strong>Support Transcripts (Server Disk):</strong> 
-                  HTML transcript archives for closed tickets are stored on the local server disk (<code>data/transcripts/</code>). Under our code retention procedure (<code>TranscriptService.cleanupOldTranscripts(retentionDays = 30)</code>), files older than 30 days are scheduled for cleanup during routine maintenance; furthermore, transcripts are permanently purged from disk upon verified user request.
+                  HTML transcript archives for closed tickets are stored on the local server disk (<code>data/transcripts/</code>). There is no automated continuous background timer active in the bot; instead, the codebase retention procedure (<code>TranscriptService.cleanupOldTranscripts(retentionDays = 30)</code>) is invoked during periodic administrative maintenance routines. User erasure requests are evaluated in accordance with applicable legislation, and upon statutory approval, associated transcript files are removed from disk.
                 </li>
                 <li>
                   <strong>In-Discord Archive Copy (<code>#ticket-log</code>):</strong> 
-                  When a support ticket is closed, a copy of the HTML transcript is posted to the staff-only <code>#🎫・ticket-log</code> channel for staff accountability. These copies reside on Discord's infrastructure under the administration of the server team, and will be manually deleted from channel history upon user erasure requests.
+                  When a support ticket is closed, a copy of the HTML transcript is posted to the staff-only <code>#🎫・ticket-log</code> channel for staff accountability and audit trails. These copies reside on Discord's infrastructure and are not deleted by an automatic timer. Where a user submits an erasure request that meets statutory requirements under applicable law, authorized staff evaluate the request and remove the transcript message and file from the channel.
                 </li>
                 <li>
                   <strong>Member Profiles & Role Preferences:</strong> 
-                  Maintained for as long as the user remains in the server. If a member leaves, their exit timestamp is noted. Data is permanently deleted upon verifiable user request.
+                  Maintained for as long as the user remains in the server. If a member leaves, their exit timestamp is noted. Upon submission of a valid erasure request, the data is evaluated and processed pursuant to statutory timelines.
                 </li>
                 <li>
                   <strong>Moderation Logs:</strong> 
@@ -357,34 +357,52 @@
           <section id="sec-8" class="legal-section">
             <h2><span class="sec-num">§ 8.</span> <span class="lang-tr">Kullanıcı Hakları ve Veri Silme Talepleri (Unutulma Hakkı)</span><span class="lang-en" style="display:none;">User Rights and Data Deletion (Right to Erasure)</span></h2>
             <div class="lang-tr">
-              <p>Kullanıcılarımız KVKK ve GDPR kapsamında aşağıdaki haklara sahiptir:</p>
+              <p>Kullanıcılarımız yürürlükteki veri koruma mevzuatı (KVKK ve GDPR) kapsamında aşağıdaki haklara sahiptir:</p>
               <ul>
                 <li><strong>Bilgi Edinme ve Erişim Hakkı:</strong> <code>/profil</code> veya <code>/uyarilar</code> komutlarını kullanarak botta kayıtlı profil ve ceza verilerinizi dilediğiniz an görüntüleyebilirsiniz.</li>
                 <li><strong>Düzeltme Hakkı:</strong> Rol tercihlerinizi <code>#🎭・rol-seç</code> ve <code>#🔔・bildirim-seç</code> kanallarından istediğiniz zaman güncelleyebilirsiniz.</li>
                 <li>
-                  <strong>Veri Silme Talebi (Unutulma Hakkı) ve Uygulama Yöntemi:</strong> 
-                  Bot veritabanındaki kayıtlarınızın silinmesini talep etmek için:
+                  <strong>Veri Silme Talebi (Unutulma Hakkı) ve Başvuru Süreci:</strong> 
+                  Bot sisteminde kayıtlı verilerinizin silinmesini talep etmek için:
                   <ol style="margin-top: 8px;">
-                    <li>Discord sunucusundaki <strong>#🎫・destek-aç</strong> kanalından resmi bir destek talebi açabilir,</li>
+                    <li>Discord sunucusundaki <strong>#🎫・destek-aç</strong> kanalından resmi bir destek bileti oluşturabilir,</li>
                     <li>Veya doğrudan HOLAROP Geliştirici Ekibine Discord üzerinden başvurabilirsiniz.</li>
                   </ol>
-                  <strong>Uygulama Süreci:</strong> Başvurunuz doğrulandığında, yetkili yöneticiler tarafından SQLite veritabanındaki üye profiliniz (<code>Member</code>), rol tercihleriniz (<code>UserRolePreference</code>), ceza kayıtlarınız ile sunucu diskindeki ve <code>#ticket-log</code> kanalındaki bilet transkriptleriniz en geç <strong>30 gün</strong> içerisinde kalıcı olarak temizlenir.
+                  <p style="margin-top: 10px;">
+                    <strong>Taleplerin Değerlendirilmesi:</strong> Veri silme başvuruları derhal veya peşin bir garantiye tabi olmaksızın; kullanıcının kimlik doğrulaması ve yürürlükteki mevzuat hükümleri çerçevesinde titizlikle değerlendirilir. Sunucu güvenliğinin temini, suistimal ve kuralların ihlalinin takibi, olası hukuki uyuşmazlıkların çözümü veya meşru menfaatler gereğince saklanması yasal olarak zorunlu olan kayıtlar (örneğin devam eden aktif itiraz veya ceza incelemeleri) mevzuatın izin verdiği sınırlar dahilinde muhafaza edilebilir; bu kapsam dışındaki veriler mevzuata uygun bulunması halinde sistemden kaldırılır.
+                  </p>
+                  <p style="margin-top: 8px;">
+                    <strong>Mevzuata Göre Başvuru Sonuçlandırma Süreleri:</strong>
+                  </p>
+                  <ul style="margin-top: 6px;">
+                    <li><strong>6698 Sayılı KVKK Kapsamında:</strong> İlgili kişinin başvurusu, talebin niteliğine göre en kısa sürede ve en geç <strong>30 (otuz) gün</strong> içerisinde ücretsiz olarak değerlendirilerek sonuçlandırılır.</li>
+                    <li><strong>GDPR (Genel Veri Koruma Yönetmeliği) Kapsamında:</strong> Talepler kural olarak gecikmeksizin ve en geç <strong>1 (bir) ay</strong> içerisinde incelenerek yanıtlanır. Taleplerin karmaşıklığı ve sayısı dikkate alınarak bu süre gerekmesi halinde <strong>2 (iki) ay daha</strong> uzatılabilir (süre uzatımı durumunda kullanıcı ilk 1 ay içinde gerekçesiyle birlikte bilgilendirilir).</li>
+                  </ul>
                 </li>
               </ul>
             </div>
             <div class="lang-en" style="display:none;">
-              <p>Under GDPR, KVKK, and standard privacy frameworks, users enjoy the following actionable rights:</p>
+              <p>Under applicable data protection legislation (including GDPR and KVKK), users enjoy the following actionable rights:</p>
               <ul>
                 <li><strong>Right of Access:</strong> You can inspect your stored profile, XP, and penalty records at any time using in-app slash commands such as <code>/profil</code> or <code>/uyarilar</code>.</li>
                 <li><strong>Right to Rectification:</strong> You can update your roles and notification preferences at any time via the self-service role channels.</li>
                 <li>
-                  <strong>Right to Erasure (Right to be Forgotten) & Execution Method:</strong> 
-                  To request the permanent deletion of your stored user records:
+                  <strong>Right to Erasure (Right to be Forgotten) & Application Process:</strong> 
+                  To request the deletion of your stored user records from the bot system:
                   <ol style="margin-top: 8px;">
                     <li>Open an official ticket in the <strong>#🎫・destek-aç</strong> support channel on our Discord server,</li>
                     <li>Or contact the HOLAROP Developer Team directly on Discord.</li>
                   </ol>
-                  <strong>Execution Workflow:</strong> Once your request is verified, authorized staff will purge your SQLite records (<code>Member</code>, <code>UserRolePreference</code>, infractions) as well as any associated transcript files from local storage and the <code>#ticket-log</code> channel within <strong>30 days</strong>.
+                  <p style="margin-top: 10px;">
+                    <strong>Evaluation of Requests:</strong> Erasure requests are not subject to immediate or unconditional guarantees; each application is evaluated following user verification in accordance with applicable statutory legislation. Records necessary for community safety, abuse prevention, legal dispute resolution, or legitimate interests permitted by law (such as active moderation appeals or audit trails) may be retained within statutory limits; data eligible for erasure under applicable law will be removed accordingly.
+                  </p>
+                  <p style="margin-top: 8px;">
+                    <strong>Statutory Evaluation and Response Timeframes:</strong>
+                  </p>
+                  <ul style="margin-top: 6px;">
+                    <li><strong>Under Law No. 6698 (KVKK):</strong> Requests are evaluated and concluded free of charge as soon as possible and within <strong>30 days</strong> at the latest, depending on the nature of the request.</li>
+                    <li><strong>Under EU GDPR:</strong> Requests are assessed and responded to without undue delay and at the latest within <strong>1 month</strong> of receipt. Taking into account the complexity and number of requests, this period may be extended by an additional <strong>2 months</strong> where necessary (in which case the user will be notified of the extension and grounds within the first month).</li>
+                  </ul>
                 </li>
               </ul>
             </div>

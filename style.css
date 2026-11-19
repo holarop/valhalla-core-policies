@@ -102,9 +102,14 @@ header.site-header {
   font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  background: linear-gradient(180deg, #FFFFFF, #CBD5E1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #FFFFFF;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.35), 0 2px 4px rgba(0, 0, 0, 0.9);
+  transition: all 0.2s ease;
+}
+
+.brand:hover .brand-title {
+  color: #FFFFFF;
+  text-shadow: 0 0 14px rgba(239, 68, 68, 0.6), 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 .brand-tag {
@@ -221,9 +226,14 @@ main.main-content {
   font-weight: 900;
   letter-spacing: -0.5px;
   margin-bottom: 14px;
-  background: linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #FFFFFF;
+  text-shadow: 0 0 20px rgba(220, 38, 38, 0.2), 0 2px 8px rgba(0, 0, 0, 0.95);
+}
+
+.hero-brand {
+  color: #FF4D4D;
+  text-shadow: 0 0 16px rgba(239, 68, 68, 0.6), 0 2px 6px rgba(0, 0, 0, 0.9);
+  display: inline-block;
 }
 
 .hero p.lead {

@@ -8,7 +8,7 @@ Bu dizin (`docs/`), Discord Developer Portal üzerinde **VALHALLA CORE** botunun
 
 - **`index.html`**: Gotik Valhalla temalı ana karşılama ve belge seçim merkezi.
 - **`terms.html`**: Türkçe ve İngilizce tam Hizmet Koşulları belgesi (anlık dil değiştirici ile).
-- **`privacy.html`**: Türkçe ve İngilizce tam Gizlilik Politikası belgesi (kod tabanındaki gerçek veri ve 30 günlük transkript saklama süresiyle birebir uyumlu).
+- **`privacy.html`**: Türkçe ve İngilizce tam Gizlilik Politikası belgesi (kod tabanındaki gerçek veri modelleri, transkript bakım prosedürleri ve silme haklarıyla birebir uyumlu).
 - **`style.css`**: Gotik siyah-koyu kırmızı (`#8B0000`), modern, mobil ve masaüstü uyumlu stil dosyası.
 - **`lang.js`**: Sayfa yenilemeden tek tıkla Türkçe / İngilizce geçişi sağlayan ve tercihi saklayan hafif JavaScript motoru.
 
